@@ -1,0 +1,62 @@
+{
+  "manifest_version": 3,
+  "name": "Web Accessibility Pro - 網路無障礙助手",
+  "version": "1.0.0",
+  "description": "最佳的無障礙瀏覽網際網路輔助工具，提供高對比度、閱讀障礙字體、語音朗讀、色盲輔助、動態暫停與無障礙導航增強。",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_title": "Web Accessibility Pro 控制面板",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "permissions": [
+    "storage",
+    "activeTab",
+    "scripting",
+    "contextMenus"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content/content.js"],
+      "css": ["content/content.css"],
+      "run_at": "document_end"
+    }
+  ],
+  "background": {
+    "service_worker": "background/service-worker.js"
+  },
+  "commands": {
+    "toggle-accessibility": {
+      "suggested_key": {
+        "default": "Alt+A",
+        "mac": "Alt+A"
+      },
+      "description": "快速開啟/關閉無障礙導讀尺"
+    },
+    "speak-selection": {
+      "suggested_key": {
+        "default": "Alt+S",
+        "mac": "Alt+S"
+      },
+      "description": "朗讀選取的文字"
+    }
+  },
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "icons/*",
+        "content/content.css"
+      ],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}
